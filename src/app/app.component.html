@@ -1,0 +1,31 @@
+<nav class="nav-bar">
+    <ul class="nav-bar__list main-container">
+        <li class="nav-bar__list-item">
+            <a routerLink="/"
+               class="nav-bar__list-link logo">
+                Decora
+            </a>
+        </li>
+        <li class="nav-bar__list-item">
+            <a routerLink="/" class="nav-bar__list-link">
+                AllProducts
+            </a>
+        </li>
+        <li class="nav-bar__list-item">
+            <a class="nav-bar__list-link">
+                Create new
+            </a>
+        </li>
+        <li class="nav-bar__list-item">
+            <button [routerLink]="isLoggedIn ? authService.logout() : '/auth/login'">
+                {{ isLoggedIn ? 'Logout' : 'Login' }}
+            </button>
+        </li>
+    </ul>
+</nav>
+
+<main class="app">
+    <div class="main-container">
+        <router-outlet></router-outlet>
+    </div>
+</main>

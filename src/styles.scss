@@ -1,0 +1,35 @@
+@import "./styles/utiles";
+
+body {
+    color: color(smoky-black);
+}
+
+.directive-errorTooltip {
+    display: flex;
+    border-radius: 5px 5px 5px 5px;
+    color: color(error);
+    white-space: pre-wrap;
+    position: absolute;
+    padding: 2px 5px !important;
+    z-index: 31;
+    font-size: smaller;
+    pointer-events: none;
+    margin-left: 1px;
+    line-height: 1;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}

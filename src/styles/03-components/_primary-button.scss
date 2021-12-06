@@ -1,0 +1,33 @@
+.primary-button {
+    cursor: pointer;
+    font-size: 18px;
+    color: color(smoky-black);
+    position: relative;
+    padding: 18px 42px;
+    background-color: transparent;
+    border: 3px solid color(almond);
+    overflow: hidden;
+    z-index: 1;
+    transition: 0.25s ease-in;
+
+    &:hover {
+        color: color(primary);
+        border-color: color(almond);
+    }
+
+    &:before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 100%;
+        top: 0;
+        z-index: -1;
+        background: color(almond);
+        transition: right 0.25s ease-in;
+    }
+
+    &:hover:before {
+        right: 0;
+    }
+}

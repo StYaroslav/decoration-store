@@ -1,0 +1,41 @@
+<div class="login">
+    <div class="login__information">
+        <img src="assets/logo%20(1).png">
+    </div>
+    <div class="login__form">
+        <div class="login__form-label">
+            Sign in
+        </div>
+        <form [formGroup]="form"
+              (ngSubmit)="onLogin()">
+            <div class="form__group field"
+                 [class.invalid]="form.controls['username'].invalid && form.controls['username'].touched">
+                <input type="input"
+                       class="form__field"
+                       placeholder="Username"
+                       name="username"
+                       id='username'
+                       formControlName="username"
+                       required
+                       errorTooltip/>
+                <label for="username" class="form__label">Username*</label>
+            </div>
+            <div class="form__group field"
+                 [class.invalid]="form.controls['password'].invalid && form.controls['password'].touched">
+                <input type="password"
+                       class="form__field"
+                       placeholder="Password"
+                       name="password"
+                       id='password'
+                       formControlName="password"
+                       required
+                       errorTooltip/>
+                <label for="password" class="form__label">Password*</label>
+            </div>
+            <button class="primary-button" type="submit">Sign in</button>
+            <div class="form__group-login-text">
+                Doesn't have an account yet? <span (click)="navigateToRegistration()">Sign up</span>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+@import '~styles/00-base/colors';
+@import "~styles/01-tools/tools-colors";
+
+.main-container {
+    height: 100%;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.app {
+    background-color: color(app-background);
+    height: calc(100vh - 160px);
+}
+
+.nav-bar {
+    background-color: color(almond);
+    height: 60px;
+
+    &__list {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        &-link.logo {
+            font-weight: bold;
+            font-size: 35px;
+        }
+    }
+}
