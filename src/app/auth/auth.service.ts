@@ -10,13 +10,21 @@ import { BehaviorSubject, Observable, Subject } from "rxjs";
 @Injectable({providedIn: 'root'})
 export class AuthService {
     apiUrl: string = 'http://127.0.0.1:8000/';
-    loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    private loggedIn = new BehaviorSubject<boolean>(false);
+    loggedIn$ = this.loggedIn.asObservable();
 
     constructor(
         private httpClient: HttpClient,
         private router: Router,
         private storageService: LocalStorageService
     ) {
+        this.checkAuthorization();
+    }
+
+    private checkAuthorization(): void {
+        this.storageService.getItem(StorageItem.ACCESS_TOKEN)
+            ? this.loggedIn.next(true)
+            : this.loggedIn.next(false);
     }
 
     private setTokens(res: AccessRefreshTokenResponseModel): void {
@@ -34,13 +42,6 @@ export class AuthService {
         this.storageService.removeItem(StorageItem.REFRESH_TOKEN);
     }
 
-    checkAuthorisation(): Observable<boolean> {
-        if (this.storageService.getItem(StorageItem.ACCESS_TOKEN)) {
-            this.loggedIn.next(true);
-        }
-        return this.loggedIn;
-    }
-
     registerNewUser(user: User): void {
         this.httpClient.post(`${this.apiUrl}auth/users/`, user).subscribe(res => {
             if (res) {
@@ -53,14 +54,16 @@ export class AuthService {
         this.httpClient.post<AccessRefreshTokenResponseModel>(`${this.apiUrl}auth/jwt/create`, user).subscribe((res) => {
             if (res) {
                 this.setTokens(res);
-                this.router.navigate(['']);
+                this.router.navigate(['/products']);
+                this.loggedIn.next(true);
             }
         })
     }
 
     logout(): void {
         this.removeTokens();
-        this.router.navigate(['/login']);
+        this.checkAuthorization();
+        this.router.navigate(['/auth/login']);
     }
 
     refreshToken(refreshToken: string): void {

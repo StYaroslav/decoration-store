@@ -1,25 +1,36 @@
 <nav class="nav-bar">
     <ul class="nav-bar__list main-container">
         <li class="nav-bar__list-item">
-            <a routerLink="/"
+            <a routerLink="/products"
                class="nav-bar__list-link logo">
                 Decora
             </a>
         </li>
-        <li class="nav-bar__list-item">
+        <li class="nav-bar__list-item main-link">
             <a routerLink="/" class="nav-bar__list-link">
-                AllProducts
+                Bracelets
             </a>
         </li>
-        <li class="nav-bar__list-item">
+        <li class="nav-bar__list-item main-link">
+            <a routerLink="/" class="nav-bar__list-link">
+                Rings
+            </a>
+        </li>
+        <li class="nav-bar__list-item main-link">
+            <a routerLink="/" class="nav-bar__list-link">
+                Chokers
+            </a>
+        </li>
+        <li class="nav-bar__list-item main-link">
             <a class="nav-bar__list-link">
                 Create new
             </a>
         </li>
-        <li class="nav-bar__list-item">
-            <button [routerLink]="isLoggedIn ? authService.logout() : '/auth/login'">
+        <li class="nav-bar__list-item user-tools">
+            <button (click)="isLoggedIn ? onLogout() : onLogin()" class="primary-button login-button">
                 {{ isLoggedIn ? 'Logout' : 'Login' }}
             </button>
+            <img *ngIf="isLoggedIn" src="assets/shopping-cart.svg">
         </li>
     </ul>
 </nav>

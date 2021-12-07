@@ -12,14 +12,6 @@ const routes: Routes = [
         path: 'register',
         component: RegisterComponent,
     },
-    // {
-    //     path: 'password-restore/:ticketId',
-    //     component: PasswordRestoreComponent,
-    // },
-    // {
-    //     path: 'forgot-password',
-    //     component: ForgotPasswordComponent,
-    // },
 ];
 
 @NgModule({

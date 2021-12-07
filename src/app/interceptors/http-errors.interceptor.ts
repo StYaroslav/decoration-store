@@ -18,9 +18,10 @@ export class HttpErrorsInterceptor implements HttpInterceptor {
             .pipe(
                 catchError((error: HttpErrorResponse) => {
                     let errorMessage = '';
-                    if (error.status === 401 && error instanceof HttpErrorResponse) {
+                    if (error.status === 401 && error instanceof HttpErrorResponse && !request.url.includes('/login') &&
+                        !request.url.includes('/refresh')) {
                         const refreshToken = this.storageService.getItem(StorageItem.REFRESH_TOKEN);
-                        if (refreshToken !== "undefined") {
+                        if (refreshToken) {
                             this.authService.refreshToken(refreshToken);
                         } else {
                             this.router.navigate(['/auth/login'])

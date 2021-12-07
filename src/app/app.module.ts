@@ -9,13 +9,14 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { HttpErrorsInterceptor } from "./interceptors/http-errors.interceptor";
 import { AuthHeaderInterceptor } from "./interceptors/auth-header.inerceptor";
-import { AllProductsComponent } from './products/all-products/all-products/all-products.component';
 import { AuthGuard } from "./guards/auth-guard.service";
+import { SwiperModule } from "swiper/angular";
+import { PageNotFoundComponent } from './404/page-not-found/page-not-found.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        AllProductsComponent,
+        PageNotFoundComponent,
     ],
     imports: [
         CommonModule,
