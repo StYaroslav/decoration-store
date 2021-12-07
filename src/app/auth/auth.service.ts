@@ -40,6 +40,7 @@ export class AuthService {
     private removeTokens(): void {
         this.storageService.removeItem(StorageItem.ACCESS_TOKEN);
         this.storageService.removeItem(StorageItem.REFRESH_TOKEN);
+        this.storageService.removeItem(StorageItem.itemsInCart);
     }
 
     registerNewUser(user: User): void {

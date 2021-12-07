@@ -10,13 +10,21 @@ import { CommonModule } from "@angular/common";
 import { HttpErrorsInterceptor } from "./interceptors/http-errors.interceptor";
 import { AuthHeaderInterceptor } from "./interceptors/auth-header.inerceptor";
 import { AuthGuard } from "./guards/auth-guard.service";
-import { SwiperModule } from "swiper/angular";
 import { PageNotFoundComponent } from './404/page-not-found/page-not-found.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from "@angular/material/dialog";
+import { DialogMessageComponent } from './dialogs/dialog-message/dialog-message.component';
+import { OrderDialogComponent } from './dialogs/order-dialog/order-dialog.component';
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { SnackbarMessageComponent } from './dialogs/snackbar-message/snackbar-message.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         PageNotFoundComponent,
+        DialogMessageComponent,
+        OrderDialogComponent,
+        SnackbarMessageComponent,
     ],
     imports: [
         CommonModule,
@@ -25,7 +33,10 @@ import { PageNotFoundComponent } from './404/page-not-found/page-not-found.compo
         HttpClientModule,
         AppRoutingModule,
         FormsModule,
+        MatSnackBarModule,
+        MatDialogModule,
         ReactiveFormsModule,
+        BrowserAnimationsModule,
     ],
     providers: [
         AuthGuard,

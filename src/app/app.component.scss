@@ -11,6 +11,7 @@
 .app {
     background-color: color(primary);
     height: calc(100vh - 60px);
+    overflow-y: auto;
 }
 
 .nav-bar {
@@ -94,11 +95,21 @@
     flex-direction: row-reverse;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: 30px;
 
     img {
         cursor: pointer;
         width: 28px;
         height: 28px;
+    }
+}
+
+.shopping-cart {
+    position: relative;
+
+    & span {
+        top: -10px;
+        left: 29px;
+        position: absolute;
     }
 }

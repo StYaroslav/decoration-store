@@ -1,0 +1,16 @@
+.products__button {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.products__order {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 40px;
+}
+
+.primary-button.order {
+    padding: 12px 42px;
+}

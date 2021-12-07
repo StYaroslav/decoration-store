@@ -13,7 +13,6 @@ export class AuthHeaderInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log("bearer")
         const ls = this.injector.get(LocalStorageService);
         const token = ls.getItem(StorageItem.ACCESS_TOKEN);
         if (token) {

@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>Submit your order</h1>
+<div mat-dialog-content>
+    <div class="login">
+        <div class="login__form">
+            <form [formGroup]="form">
+                <div [class.invalid]="form.controls['address'].invalid && form.controls['address'].touched"
+                     class="form__group field">
+                    <input type="input"
+                           class="form__field"
+                           placeholder="Address"
+                           name="address"
+                           id='address'
+                           formControlName="address"
+                           required
+                           errorTooltip/>
+                    <label for="address" class="form__label">Address*</label>
+                </div>
+                <div class="form__group field"
+                     [class.invalid]="form.controls['telephone'].invalid && form.controls['telephone'].touched">
+                    <input type="text"
+                           class="form__field"
+                           placeholder="Telephone"
+                           name="telephone"
+                           id='telephone'
+                           formControlName="telephone"
+                           required
+                           errorTooltip/>
+                    <label for="telephone" class="form__label">Telephone*</label>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button [disabled]="form.invalid" (click)="submit()" mat-dialog-close class="primary-button" type="submit">Submit</button>
+</div>

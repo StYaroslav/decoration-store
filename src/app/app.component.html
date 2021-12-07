@@ -6,8 +6,8 @@
                 Decora
             </a>
         </li>
-        <li class="nav-bar__list-item main-link">
-            <a routerLink="/" class="nav-bar__list-link">
+        <li routerLink="/products/bracelets" class="nav-bar__list-item main-link">
+            <a class="nav-bar__list-link">
                 Bracelets
             </a>
         </li>
@@ -17,8 +17,8 @@
                 Rings
             </a>
         </li>
-        <li class="nav-bar__list-item main-link">
-            <a routerLink="/" class="nav-bar__list-link">
+        <li routerLink="/products/chokers" class="nav-bar__list-item main-link">
+            <a class="nav-bar__list-link">
                 Chokers
             </a>
         </li>
@@ -31,7 +31,10 @@
             <button (click)="isLoggedIn ? onLogout() : onLogin()" class="primary-button login-button">
                 {{ isLoggedIn ? 'Logout' : 'Login' }}
             </button>
-            <img *ngIf="isLoggedIn" src="assets/shopping-cart.svg">
+            <div (click)="navigateToCart()" class="shopping-cart">
+                <img *ngIf="isLoggedIn" src="assets/shopping-cart.svg">
+                <span *ngIf="(productsService.itemsInCart.length || itemsInCart) && isLoggedIn">{{ itemsInCart }}</span>
+            </div>
         </li>
     </ul>
 </nav>

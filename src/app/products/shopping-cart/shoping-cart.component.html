@@ -1,6 +1,6 @@
 <div class="products">
     <div class="products__container">
-        <div *ngFor="let item of rings" class="products__item">
+        <div *ngFor="let item of uniqueItems" class="products__item">
             <div class="products__main-info">
                 <div class="products__item-img">
                     <img [src]="productsService.getImagePath(item)">
@@ -9,18 +9,22 @@
                     <div class="products__info-title">
                         {{ item.title }}
                     </div>
-                    <div class="products__info-description">
-                        {{ item.description }}
-                    </div>
                     <div class="products__info-price">
                         Price: {{ item.price }}$
                     </div>
                 </div>
             </div>
             <div class="products__button">
-                <button [disabled]="!isLoggedIn"
-                        [class.noselect]="!isLoggedIn" class="primary-button" (click)="productsService.addToCart(item)">Add to cart</button>
+                <button [disabled]="item.quantity === 0" class="primary-button rounded" (click)="removeItem(item)">-</button>
+                <span>{{ item.quantity }}</span>
+                <button class="primary-button rounded" (click)="addItem(item)">+</button>
             </div>
+        </div>
+        <div class="products__order">
+            <div class="total-price">
+                Total price: {{ totalPrice }}$
+            </div>
+            <button (click)="makeOrder()" class="primary-button order">Order</button>
         </div>
     </div>
 </div>
