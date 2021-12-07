@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SwiperOptions } from 'swiper';
 import SwiperCore, { Pagination } from "swiper";
+import { HttpClient } from "@angular/common/http";
 
 SwiperCore.use([Pagination]);
 
@@ -18,7 +19,7 @@ export class AllProductsComponent implements OnInit {
         },
     };
 
-    constructor() {
+    constructor(private http: HttpClient) {
 
     }
 

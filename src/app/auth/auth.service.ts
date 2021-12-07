@@ -33,7 +33,7 @@ export class AuthService {
         this.storageService.setItem(StorageItem.REFRESH_TOKEN, refresh);
     }
 
-    private setAccessToken(res: AccessTokenResponseModel): void {
+    setAccessToken(res: AccessTokenResponseModel): void {
         this.storageService.setItem(StorageItem.ACCESS_TOKEN, res.access);
     }
 
@@ -66,11 +66,7 @@ export class AuthService {
         this.router.navigate(['/auth/login']);
     }
 
-    refreshToken(refreshToken: string): void {
-        this.httpClient.post<AccessTokenResponseModel>(`${this.apiUrl}auth/jwt/refresh`, {refresh: refreshToken}).subscribe(res => {
-            if (res) {
-                this.setAccessToken(res);
-            }
-        })
+    refreshToken(refreshToken: string): Observable<AccessTokenResponseModel> {
+        return this.httpClient.post<AccessTokenResponseModel>(`${this.apiUrl}auth/jwt/refresh`, {refresh: refreshToken})
     }
 }

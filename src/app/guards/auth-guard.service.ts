@@ -4,11 +4,13 @@ import { CanActivate } from '@angular/router';
 import { LocalStorageService } from '../services/local-storage.service';
 import { StorageItem } from "../models/enums/local-storage-item.enum";
 import { AuthService } from "../auth/auth.service";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
 
     constructor(
+        private http: HttpClient,
         private router: Router,
         private authService: AuthService,
         private localStorage: LocalStorageService,

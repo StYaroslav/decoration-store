@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, switchMap, throwError } from 'rxjs';
 import { LocalStorageService } from "../services/local-storage.service";
 import { StorageItem } from "../models/enums/local-storage-item.enum";
 import { AuthService } from "../auth/auth.service";
 import { Router } from "@angular/router";
+import { AccessTokenResponseModel } from "../models/interfaces/login-response";
 
 @Injectable()
 export class HttpErrorsInterceptor implements HttpInterceptor {
@@ -17,25 +18,23 @@ export class HttpErrorsInterceptor implements HttpInterceptor {
         return next.handle(request)
             .pipe(
                 catchError((error: HttpErrorResponse) => {
-                    let errorMessage = '';
                     if (error.status === 401 && error instanceof HttpErrorResponse && !request.url.includes('/login') &&
-                        !request.url.includes('/refresh')) {
+                        !request.url.includes('/refresh') && !request.url.includes('/verify')) {
                         const refreshToken = this.storageService.getItem(StorageItem.REFRESH_TOKEN);
                         if (refreshToken) {
-                            this.authService.refreshToken(refreshToken);
-                        } else {
-                            this.router.navigate(['/auth/login'])
+                            return this.authService.refreshToken(refreshToken).pipe(
+                                switchMap(res => {
+                                    if (res) {
+                                        this.authService.setAccessToken(res);
+                                        return next.handle(request);
+                                    }
+                                })
+                            );
                         }
-                        return;
-                    } else if (error.error instanceof ErrorEvent) {
-                        // client-side error
-                        errorMessage = `Error: ${error.error.message}`;
                     } else {
-                        // server-side error
-                        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+                        this.router.navigate(['/auth/login']);
                     }
-                    window.alert(errorMessage);
-                    return throwError(errorMessage);
+                    return throwError(error);
                 }),
             );
     }
